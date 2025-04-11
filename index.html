@@ -65,3 +65,57 @@
             padding: 15px;
             background-color: #ffb103; /* SA flag yellow */
             color: #333;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .error {
+            color: #de1c2b;
+            font-weight: bold;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+            .section {
+                padding: 15px;
+            }
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="text-align: center; padding: 10px; background-color: #006633; color: #fff;">
+        <a href="index.html">Home</a> |
+        <a href="tax-calculator.html">Tax Calculator</a> |
+        <a href="vat-add.html">Add VAT</a> |
+        <a href="vat-remove.html">Remove VAT</a> |
+        <a href="guides.html">Guides</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
+    </nav>
+    <div style="padding: 20px; max-width: 700px; margin: 20px auto;">
+        <h1>SA Tax & VAT Calculator</h1>
+        <p>Welcome to your free, South African-focused financial toolkit. Calculate your 2025 income tax (including medical aid credits), add 15% VAT to prices, or remove VAT for net costs all in seconds. Built for workers, freelancers, and businesses in South Africa, our tools simplify SARS tax brackets and VAT calculations. Pick a tool below to get started, or explore our guides for tips on taxes and VAT.</p>
+        <ul style="list-style: none; padding: 0;">
+            <li><a href="tax-calculator.html" style="color: #006633;">Tax Calculator</a> - Net pay after PAYE & UIF</li>
+            <li><a href="vat-add.html" style="color: #006633;">Add VAT</a> - Add 15% VAT to any amount</li>
+            <li><a href="vat-remove.html" style="color: #006633;">Remove VAT</a> - Strip 15% VAT from totals</li>
+            <li><a href="guides.html" style="color: #006633;">Guides</a> - Learn about SA taxes and VAT</li>
+        </ul>
+    </div>
+</body>
+</html>
