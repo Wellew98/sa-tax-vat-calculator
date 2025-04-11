@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1483143620477998" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate South African income tax and net pay for 2025, including medical aid credits, with this free tool.">
+    <title>Tax Calculator - SA Tax & VAT 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #006633; /* SA flag green */
+            text-shadow: 1px 1px 2px #ffb103; /* SA flag yellow accent */
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px solid #de1c2b; /* SA flag red */
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #004b8d; /* SA flag blue */
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #006633; /* SA flag green */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #004d2e;
+        }
+        .reset-btn {
+            background-color: #de1c2b; /* SA flag red */
+        }
+        .reset-btn:hover {
+            background-color: #b51623;
+        }
+        #taxResult {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #ffb103; /* SA flag yellow */
+            color: #333;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .error {
+            color: #de1c2b;
+            font-weight: bold;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+            .section {
+                padding: 15px;
+            }
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="text-align: center; padding: 10px; background-color: #006633; color: #fff;">
+        <a href="index.html">Home</a> |
+        <a href="tax-calculator.html">Tax Calculator</a> |
+        <a href="vat-add.html">Add VAT</a> |
+        <a href="vat-remove.html">Remove VAT</a> |
+        <a href="guides.html">Guides</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
+    </nav>
+    <div style="padding: 20px; max-width: 700px; margin: 20px auto;">
+        <h1>Tax Calculator (2025)</h1>
+        <p>Calculate your South African net pay after PAYE and UIF, updated for 2025 SARS tax rates. Include medical aid credits (R364 for main member, R246 per extra dependent) for accurate results.</p>
+    </div>
+    <div class="section">
+        <h2>Income Tax (PAYE + UIF)</h2>
+        <label for="income">Gross Monthly Income (ZAR):</label>
+        <input type="number" id="income" placeholder="e.g., 30000" min="0" step="0.01">
+        <label for="dependents">Number of Medical Aid Dependents (incl. you):</label>
+        <input type="number" id="dependents" placeholder="e.g., 1" min="0" max="10" value="1">
+        <button onclick="calculateTax()">Calculate Tax</button>
+        <button class="reset-btn" onclick="resetTax()">Reset</button>
+        <div id="taxResult"></div>
+    </div>
+    <script>
+        function calculateTax() {
+            const income = parseFloat(document.getElementById('income').value);
+            const dependents = parseInt(document.getElementById('dependents').value) || 0;
+            const resultDiv = document.getElementById('taxResult');
+
+            if (!income || income < 0 || dependents < 0) {
+                resultDiv.innerHTML = '<span class="error">Please enter valid positive values for income and dependents.</span>';
+                return;
+            }
+
+            const annualIncome = income * 12;
+            let tax = 0;
+            const rebate = 17235; // 2025 primary rebate
+            const uif = Math.min(income * 0.01, 177.12); // 1% capped
+
+            // Medical aid tax credits (2025 estimate)
+            const creditMain = 364; // Main member
+            const creditFirstDep = 364; // First dependent
+            const creditExtraDep = 246; // Each additional dependent
+            let medicalCredit = 0;
+            if (dependents >= 1) medicalCredit += creditMain; // Main member
+            if (dependents >= 2) medicalCredit += creditFirstDep; // First dependent
+            if (dependents > 2) medicalCredit += (dependents - 2) * creditExtraDep; // Extra dependents
+            const annualMedicalCredit = medicalCredit * 12;
+
+            // Simplified 2025 SARS tax brackets (annual)
+            if (annualIncome <= 237100) {
+                tax = annualIncome * 0.18;
+            } else if (annualIncome <= 370500) {
+                tax = 42678 + (annualIncome - 237100) * 0.26;
+            } else {
+                tax = 77362 + (annualIncome - 370500) * 0.31;
+            }
+
+            tax = Math.max(tax - rebate - annualMedicalCredit, 0); // Apply rebate and medical credits
+            const monthlyTax = tax / 12;
+            const netPay = income - monthlyTax - uif;
+
+            resultDiv.innerHTML = `
+                <strong>Results:</strong><br>
+                Annual Tax (before credits): R${(tax + rebate + annualMedicalCredit).toFixed(2)}<br>
+                Medical Aid Credit: R${annualMedicalCredit.toFixed(2)}<br>
+                Annual Tax (after credits): R${tax.toFixed(2)}<br>
+                Monthly Tax: R${monthlyTax.toFixed(2)}<br>
+                UIF: R${uif.toFixed(2)}<br>
+                Net Pay (Monthly): R${netPay.toFixed(2)}
+            `;
+        }
+
+        function resetTax() {
+            document.getElementById('income').value = '';
+            document.getElementById('dependents').value = '1';
+            document.getElementById('taxResult').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
