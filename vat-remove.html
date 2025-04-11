@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1483143620477998" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Remove 15% South African VAT from any total with this free 2025 calculator—ideal for receipts and net costs.">
+    <title>Remove VAT - SA Tax & VAT Calculator 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #006633; /* SA flag green */
+            text-shadow: 1px 1px 2px #ffb103; /* SA flag yellow accent */
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px solid #de1c2b; /* SA flag red */
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #004b8d; /* SA flag blue */
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #006633; /* SA flag green */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #004d2e;
+        }
+        .reset-btn {
+            background-color: #de1c2b; /* SA flag red */
+        }
+        .reset-btn:hover {
+            background-color: #b51623;
+        }
+        #vatResult {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #ffb103; /* SA flag yellow */
+            color: #333;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .error {
+            color: #de1c2b;
+            font-weight: bold;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+            .section {
+                padding: 15px;
+            }
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="text-align: center; padding: 10px; background-color: #006633; color: #fff;">
+        <a href="index.html">Home</a> |
+        <a href="tax-calculator.html">Tax Calculator</a> |
+        <a href="vat-add.html">Add VAT</a> |
+        <a href="vat-remove.html">Remove VAT</a> |
+        <a href="guides.html">Guides</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
+    </nav>
+    <div style="padding: 20px; max-width: 700px; margin: 20px auto;">
+        <h1>Remove VAT Calculator</h1>
+        <p>Remove 15% South African VAT from any total ideal for decoding receipts or finding net costs. Updated for 2025.</p>
+    </div>
+    <div class="section">
+        <h2>Remove VAT (15%)</h2>
+        <label for="vatAmount">Total Amount (ZAR):</label>
+        <input type="number" id="vatAmount" placeholder="e.g., 1150" min="0" step="0.01">
+        <button onclick="calculateVAT()">Calculate VAT</button>
+        <button class="reset-btn" onclick="resetVAT()">Reset</button>
+        <div id="vatResult"></div>
+    </div>
+    <script>
+        function calculateVAT() {
+            const amount = parseFloat(document.getElementById('vatAmount').value);
+            const resultDiv = document.getElementById('vatResult');
+            if (!amount || amount < 0) {
+                resultDiv.innerHTML = '<span class="error">Please enter a valid positive amount.</span>';
+                return;
+            }
+            const total = amount;
+            const vat = amount - (amount / 1.15);
+            const base = amount / 1.15;
+            resultDiv.innerHTML = `
+                <strong>Results:</strong><br>
+                Base Amount: R${base.toFixed(2)}<br>
+                VAT (15%): R${vat.toFixed(2)}<br>
+                Total: R${total.toFixed(2)}
+            `;
+        }
+        function resetVAT() {
+            document.getElementById('vatAmount').value = '';
+            document.getElementById('vatResult').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
